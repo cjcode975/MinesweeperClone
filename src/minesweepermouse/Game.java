@@ -1,8 +1,10 @@
 
 package minesweepermouse;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -59,7 +61,7 @@ class Game {
      * @param N_Cols number of columns in minefield
      * @param N_Mines number of mines in minefield
      */
-    public Game(int N_Rows, int N_Cols, int N_Mines){
+    public Game(int N_Rows, int N_Cols, int N_Mines, Point pos){
            
         //Initialise the minefield
         nrows = N_Rows;
@@ -75,7 +77,8 @@ class Game {
          
         //Create GUI components
         //Window to hold game
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+        window.setLocation(pos);
         window.setLayout(null);
         window.setResizable(false); 
         window.setSize(button_size*(ncols+2), button_size*(nrows+7)); 
@@ -122,7 +125,7 @@ class Game {
         end_game.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                New_Game ng = new New_Game();
+                New_Game ng = new New_Game(window.getLocationOnScreen());
                 window.dispose();
             }
             
@@ -263,7 +266,8 @@ class Game {
         
         //New window
         final JFrame eg_window = new JFrame("Minesweeper");
-        eg_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
+        eg_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
+        eg_window.setLocation(window.getLocationOnScreen());
         eg_window.setLayout(null);
         eg_window.setResizable(false); 
         eg_window.setSize(9*button_size, 8*button_size);
@@ -290,9 +294,9 @@ class Game {
         new_game.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
+                Game ng = new Game(nrows,ncols,nmines,eg_window.getLocationOnScreen());
                 eg_window.dispose();
-                window.dispose();
-                Game ng = new Game(nrows,ncols,nmines);
+                window.dispose();                
             }
             
         });        
@@ -306,9 +310,9 @@ class Game {
         new_game2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
+                New_Game ng = new New_Game(eg_window.getLocationOnScreen());
                 eg_window.dispose();
-                window.dispose();
-                New_Game ng = new New_Game();
+                window.dispose();                
             }
             
         });        

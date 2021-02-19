@@ -2,6 +2,7 @@ package minesweepermouse;
 
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -19,10 +20,11 @@ public class New_Game {
         
     private final JFrame window = new JFrame("Minesweeper");
     
-    public New_Game(){
+    public New_Game(Point pos){
                 
         //Setup GUI
         window.setSize(17*button_size, 12*button_size);
+        window.setLocation(pos);
         window.setLayout(null);
         window.setResizable(false); 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +64,7 @@ public class New_Game {
         Easy.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Game new_game = new Game(10,10,10);
+                Game new_game = new Game(10,10,10,window.getLocationOnScreen());
                 window.dispose();
             }
             
@@ -77,7 +79,7 @@ public class New_Game {
         Med.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Game new_game = new Game(16,16,40);
+                Game new_game = new Game(16,16,40,window.getLocationOnScreen());
                 window.dispose();
             }
             
@@ -92,7 +94,7 @@ public class New_Game {
         Hard.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Game new_game = new Game(16,30,99);
+                Game new_game = new Game(16,30,99,window.getLocationOnScreen());
                 window.dispose();
             }
             
@@ -107,7 +109,7 @@ public class New_Game {
         Cust.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Game new_game = new Game(Integer.parseInt(text[4][0].getText()),Integer.parseInt(text[4][1].getText()),Integer.parseInt(text[4][2].getText()));
+                Game new_game = new Game(Integer.parseInt(text[4][0].getText()),Integer.parseInt(text[4][1].getText()),Integer.parseInt(text[4][2].getText()),window.getLocationOnScreen());
                 window.dispose();
             }
             
